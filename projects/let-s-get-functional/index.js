@@ -20,19 +20,61 @@ var _ = require('underbar');
  *
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
-
-var maleCount = function(array) {
- let males = _.filter(array, function(customer){
+var maleCount = function(customers){
+let males = _.filter(customers, function(customer){
     return customer.gender === 'male';
- })
- return males.length
+})
+return males.length;
 };
 
-var femaleCount = function();
+var femaleCount = (customers) => {
+    let females = _.reduce(customers, function (result, customer, index){
+        if (customer.gender === 'female'){
+         result += 1
+        };
+        return result;
+    }, 0); 
+    return females;
+};
 
-var oldestCustomer;
+var oldestCustomer = (customers) => {
+    //declare the oldest variable;
+    let theOldest;
+    //initialize the last customer variable to equal 0;
+    let lastCustomer = 0;
+    //loop through customers
+    for(let i = 0; i < customers.length; i++){
+        //if the customers age is greater than the last customer
+        if(customers[i].age > lastCustomer){
+            //set the oldest customers name to match
+            theOldest = customers[i].name;
+            //update the lastcustomer age
+            lastCustomer = customers[i].age;
+        }
+    }
+    //return the oldest customer
+    return theOldest;
+};
 
-var youngestCustomer;
+
+var youngestCustomer = (customers) => {
+    //declare the oldest variable;
+    let theYoungest;
+    //initialize the last customer variable to equal 500;
+    let lastCustomer = 500;
+    //loop through customers
+    for(let i = 0; i < customers.length; i++){
+        //if the customers age is less than the last customer
+        if(customers[i].age < lastCustomer){
+            //set the oldest customers name to match
+            theYoungest = customers[i].name;
+            //update the lastcustomer age
+            lastCustomer = customers[i].age;
+        }
+    }
+    //return the oldest customer
+    return theYoungest;
+};
 
 var averageBalance;
 
