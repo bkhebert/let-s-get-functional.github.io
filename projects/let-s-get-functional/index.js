@@ -76,7 +76,14 @@ var youngestCustomer = (customers) => {
     return theYoungest;
 };
 
-var averageBalance;
+var averageBalance = (customers) => {
+    let totalBalance;
+    for(let i = 0; i < customers.length; i++){
+        totalBalance += parseFloat(customers[i].balance.slice(1).replaceAll(',','').replace('.',''));
+    }
+    let averageBalance = totalBalance / customers.length;
+    return averageBalance.
+};
 
 var firstLetterCount;
 
