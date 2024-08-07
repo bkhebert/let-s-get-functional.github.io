@@ -125,11 +125,84 @@ var friendsCount = (arrayOfCustomers, nameOfFriend) => {
     return arr
 };
 
-var topThreeTags = () => {
-    let arr = []
-
-    return arr
-};
+var topThreeTags = (customersArr) => {
+        //initialize an empty array
+        let arr = [];
+        //initialize an empty object
+        let obj = {};
+            //loop through the array
+            for(let i = 0; i < customersArr.length; i++){
+                //loop through the tags
+                for(let i2 = 0; i2 < customersArr[i].tags.length; i2++){
+                    //make each individual tag an object key value set equal to zero
+                    obj[customersArr[i].tags[i2]] = 0;
+                }
+            }
+              //loop through the array again
+            for(let i = 0; i < customersArr.length; i++){
+                //loop through the tags again
+                for(let i2 = 0; i2 < customersArr[i].tags.length; i2++){
+                    //add 1 to each key value inside the object per occurance of the tag
+                    obj[customersArr[i].tags[i2]] += 1;
+                }
+            }
+      //initialize 6 more variables, 3 set to number 0, and 3 set to an empty string
+      let firstNum = 0;
+      let firstTag = '';
+      let secondNum = 0;
+      let secondTag = '';
+      let thirdNum = 0;
+      let thirdTag = '';
+      
+      //loop through the object
+      for(let key in obj){
+        //loop through the object AGAIN
+        for(let key2 in obj){
+            //if the objects key is greater than all other keys and is greater than or equal to the first number, 
+             if(obj[key] >= obj[key2] && obj[key] >= firstNum){
+                //reassign the variables, one to the objects key
+            firstTag = key;
+            //the other to the objects key value, which should be a number
+            firstNum = obj[key];
+             }
+        }
+      }
+      //delete the object key that was selected as the firstTag
+      delete obj[firstTag];
+      //loop through the object again 
+    for(let key in obj){
+        //loop through the object AGAIN
+        for(let key2 in obj){
+            //if the objects key is greater than all other keys and is greater than or equal to the second number
+             if(obj[key] >= obj[key2] && obj[key] >= secondNum){
+                //reassign the variables, one to the objects key
+            secondTag = key;
+            //the other to the key value
+            secondNum = obj[key];
+             }
+        }
+      }
+      //delete the key value pair associated with second place 
+      delete obj[secondTag];
+      //loop through the object once more
+      for(let key in obj){
+        //loop through the object AGAIN
+        for(let key2 in obj){
+            //same concept as on line 176, except here, the third number is compared
+             if(obj[key] >= obj[key2] && obj[key] >= thirdNum){
+                //same drill
+            thirdTag = key;
+            thirdNum = obj[key];
+             }
+        }
+      }
+      //no need to delete the third value as we are done looping. now, push the top 3 tags into the empty array
+      arr.push(firstTag);
+      arr.push(secondTag);
+      arr.push(thirdTag);
+      //return the array
+        return arr
+    };
 
 var genderCount;
 
