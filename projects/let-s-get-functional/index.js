@@ -77,21 +77,59 @@ var youngestCustomer = (customers) => {
 };
 
 var averageBalance = (customers) => {
-    let totalBalance;
+    let totalBalance = 0;
     for(let i = 0; i < customers.length; i++){
-        totalBalance += parseFloat(customers[i].balance.slice(1).replaceAll(',','').replace('.',''));
+      if(customers[i].balance.length > 0){
+        totalBalance += parseFloat(customers[i].balance.slice(1).replaceAll(',',''));
+        console.log(parseFloat(customers[i].balance.slice(1).replaceAll(',','')))
     }
-    let averageBalance = totalBalance / customers.length;
-    return averageBalance.
+    }
+    let aveBalance = totalBalance / customers.length;
+    return aveBalance;
 };
 
-var firstLetterCount;
+var firstLetterCount = (array, char) => {
+    let number = 0;
+    for(let i = 0; i < array.length; i++){
+        if (array[i].name[0] === char.toUpperCase() || array[i].name[0] === char.toLowerCase()){
+            number += 1;
+        }
+    }
+    return number;
+};
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = (arrayOfCustomers, customerName, char) => {
+    let number = 0;
+    for(let i = 0; i < arrayOfCustomers.length; i++){
+        if(arrayOfCustomers[i].name === customerName){
+            for(let i2 = 0; i2 < arrayOfCustomers[i].friends.length; i2++){
+                if(arrayOfCustomers[i].friends[i2].name[0] === char.toUpperCase() || arrayOfCustomers[i].friends[i2].name === char.toLowerCase() ){
+                    number += 1;
+                }
+            }
+        }
+    }
+    return number;
+};
 
-var friendsCount;
+var friendsCount = (arrayOfCustomers, nameOfFriend) => {
+    let arr = [];
+        for(let i = 0; i < arrayOfCustomers.length; i++){
+            for(let i2 = 0; i2 < arrayOfCustomers[i].friends.length; i2++){
+                if(arrayOfCustomers[i].friends[i2].name === nameOfFriend){
+                    arr.push(arrayOfCustomers[i].name);
+                }
+            }
+        }
 
-var topThreeTags;
+    return arr
+};
+
+var topThreeTags = () => {
+    let arr = []
+
+    return arr
+};
 
 var genderCount;
 
