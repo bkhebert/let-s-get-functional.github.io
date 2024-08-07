@@ -204,7 +204,37 @@ var topThreeTags = (customersArr) => {
         return arr
     };
 
-var genderCount;
+var genderCount = (arrayOfCustomers) => {
+    //create object literal
+    let obj = {};
+    //set an object key, 'male', to be equal to the total number of occurences of that gender using reduce
+                    //REDUCE takes in the customer array, a function that will be looped through, and seed of 0
+                                            //the function will take in the customer at an index and increase the number by 1
+    obj.male = _.reduce(arrayOfCustomers, function (result, customer, index){
+        //if the customers gender is male
+        if (customer.gender === 'male'){
+            //add 1 to the result
+         result += 1
+        };
+        //return the result
+        return result;
+    }, 0); 
+    //the same is done for females and non-binary
+    obj.female = _.reduce(arrayOfCustomers, function (result, customer, index){
+        if (customer.gender === 'female'){
+         result += 1
+        };
+        return result;
+    }, 0); 
+    obj["non-binary"] = _.reduce(arrayOfCustomers, function (result, customer, index){
+        if (customer.gender === 'non-binary'){
+         result += 1
+        };
+        return result;
+    }, 0);
+    //return the object 
+    return obj 
+} ;
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
