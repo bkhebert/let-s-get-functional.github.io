@@ -116,33 +116,61 @@ var averageBalance = (customers) => {
 
 
 var firstLetterCount = (array, char) => {
+        //return the result of array calling the reduce method. 
+        return array.reduce( (count, person ) => {
+            //if the persons name first letter matches char to upper or lowercase
+            if(person.name[0] === char.toUpperCase() || person.name[0] === char.toLowerCase() ){
+                //increase coutn by 1
+              count += 1
+              //return the count
+              return count
+            }
+            //if it does not match, return the count
+          return count
+          //seed is zero
+        }, 0)
+    };
+    /*
     //initialize a number to zero
     let number = 0;
     //loop through the array 
     for(let i = 0; i < array.length; i++){
-        //if the value of the objects key name first letter to uppercase equals the char or to a lower case char
+        //if the value of the objects key name first letter to uppercase equals the char
         if (array[i].name[0] === char.toUpperCase() || array[i].name[0] === char.toLowerCase()){
-            //increment number by 1
             number += 1;
         }
     }
-    //return the number
     return number;
+}; */
+
+var friendFirstLetterCount = (arrayOfC, CName, char) => {
+    //initialize X to uppercase version of char
+    const X = char.toUpperCase();
+    //initialize x to lowercase version of char
+    const x = char.toLowerCase();
+    //return the value of the array calling filter that returns the matching object name in an array. use reduce on the friends in this object to get sum of matching char letters to the first letter in each friend
+    return arrayOfC.filter( (c) => CName === c.name  )[0].friends.reduce( ( sum, f ) => f.name[0] === X || f.name[0] === x ? sum += 1 : sum , 0 );
 };
 
-var friendFirstLetterCount = (arrayOfCustomers, customerName, char) => {
+ /*   //initialize a number to zero
     let number = 0;
+    //loop through array of customers
     for(let i = 0; i < arrayOfCustomers.length; i++){
+        //if the names match
         if(arrayOfCustomers[i].name === customerName){
+            //loop through the customers friends array
             for(let i2 = 0; i2 < arrayOfCustomers[i].friends.length; i2++){
+                //if the customers friends name first letter matches teh char in upper or lowercase
                 if(arrayOfCustomers[i].friends[i2].name[0] === char.toUpperCase() || arrayOfCustomers[i].friends[i2].name === char.toLowerCase() ){
+                    //increase the number by 1
                     number += 1;
                 }
             }
         }
     }
+    //return the number
     return number;
-};
+}; */
 
 var friendsCount = (arrayOfCustomers, nameOfFriend) => {
     //initialized an array to empty
