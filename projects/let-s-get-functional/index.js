@@ -20,21 +20,31 @@ var _ = require('underbar');
  *
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
-var maleCount = function(customers){
-let males = _.filter(customers, function(customer){
-    return customer.gender === 'male';
-})
-return males.length;
-};
 
+var maleCount = function(customers){
+    //return the result of customers array calling filter method. filter method returns an array. Filter has a function.
+    // Filter method iterates customers array values through parameters of its function 
+        return customers.filter( (customer) => {
+    //the purpose of the function in filter is to return a bool. all true bools are added to filters returned array. 
+    //each value of customera arrays indexed values, objects, that has a key, gender, that has a value of male string that returns true, it gets added to a new array.  
+        return customer.gender === 'male';
+    //the length of the resulting array is what ultimately gets returned.
+}).length
+};
 var femaleCount = (customers) => {
-    let females = _.reduce(customers, function (result, customer, index){
+    //return the result of customers array calling the reduce method. Reduce method returns a value. Reduce has a function and a seed value.
+    //The function in reduce takes in 3 parameters. The result parameter is given the seed value of 0. customers array values are iterated through customer parameter.
+     //the function directly interacts with the result parameter, as result is ultimately the return value for reduce.
+    return customers.reduce( (result, customer, index) => {
+       //the function asks, if the customer objects gender is female.
         if (customer.gender === 'female'){
+            //if bool is true add 1 to result.
          result += 1
         };
+        //return the result.
         return result;
+        //seed value. Passed into result as the intiial value.
     }, 0); 
-    return females;
 };
 
 var oldestCustomer = (customers) => {
@@ -77,24 +87,46 @@ var youngestCustomer = (customers) => {
 };
 
 var averageBalance = (customers) => {
+    //return the customers array calling reduce method
+    return  customers.reduce( (total, customer,index ) => {
+        //if the customers balance length is greater than zero
+        if(customer.balance.length > 0){
+            //add to the total the number of that balance. parse float to convert string to number, slicing off the dollar sign and replacing all commas.
+        return total + parseFloat(customer.balance.slice(1).replaceAll(',', ''));
+        }//the seed is 0. divide the value by the length of the customers array before returning
+    }, 0) / customers.length
+};
+    /*
+    //initialize a variable, totalBalance, to zero
     let totalBalance = 0;
+    //loop through the customers array
     for(let i = 0; i < customers.length; i++){
+        //if the customers balance has a length greater than zero
       if(customers[i].balance.length > 0){
+        //add to the total balance the parseFloat of each customer objects key value of balance, use slice at length 1 (for the $ sign) and replacingAll for commas
         totalBalance += parseFloat(customers[i].balance.slice(1).replaceAll(',',''));
+        //just checking 
         console.log(parseFloat(customers[i].balance.slice(1).replaceAll(',','')))
     }
     }
-    let aveBalance = totalBalance / customers.length;
-    return aveBalance;
-};
+    //return the average balance equate to the total balance divided by the amount of customers in the array
+    return totalBalance / customers.length;
+    
+    */
+
 
 var firstLetterCount = (array, char) => {
+    //initialize a number to zero
     let number = 0;
+    //loop through the array 
     for(let i = 0; i < array.length; i++){
+        //if the value of the objects key name first letter to uppercase equals the char or to a lower case char
         if (array[i].name[0] === char.toUpperCase() || array[i].name[0] === char.toLowerCase()){
+            //increment number by 1
             number += 1;
         }
     }
+    //return the number
     return number;
 };
 
@@ -113,15 +145,20 @@ var friendFirstLetterCount = (arrayOfCustomers, customerName, char) => {
 };
 
 var friendsCount = (arrayOfCustomers, nameOfFriend) => {
+    //initialized an array to empty
     let arr = [];
+    //loop through the array of customers
         for(let i = 0; i < arrayOfCustomers.length; i++){
+            //created another loop, it loops through the array of friends
             for(let i2 = 0; i2 < arrayOfCustomers[i].friends.length; i2++){
+                //if the array of customer at a certain index, has friends at any index, whose name is equal to the name of the friend parameter
                 if(arrayOfCustomers[i].friends[i2].name === nameOfFriend){
+                    //push that customers name, into the array
                     arr.push(arrayOfCustomers[i].name);
                 }
             }
         }
-
+    //then return the array
     return arr
 };
 
